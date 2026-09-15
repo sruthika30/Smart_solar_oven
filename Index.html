@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Solar Microwave Oven</title>
+
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #f8fafc
+                );
+
+            color: #1e293b;
+        }
+
+
+        /* ===============================
+           HEADER
+        =============================== */
+
+        header {
+
+            background: #ffffff;
+
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 40px;
+
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.08);
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .logo-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 12px;
+
+            background: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 24px;
+        }
+
+
+        .logo h2 {
+
+            font-size: 21px;
+
+        }
+
+
+        .connection {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .connection-dot {
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+
+        /* ===============================
+           MAIN
+        =============================== */
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 45px 25px;
+        }
+
+
+        .heading {
+
+            margin-bottom: 35px;
+
+            text-align: center;
+        }
+
+
+        .heading h1 {
+
+            font-size: 34px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .heading p {
+
+            color: #64748b;
+
+            font-size: 16px;
+        }
+
+
+        /* ===============================
+           OVEN DISPLAY
+        =============================== */
+
+        .oven {
+
+            background: #1e293b;
+
+            width: 100%;
+
+            max-width: 650px;
+
+            height: 300px;
+
+            margin: 0 auto 40px;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 20px 40px rgba(0,0,0,0.18);
+        }
+
+
+        .oven-screen {
+
+            width: 100%;
+
+            height: 200px;
+
+            border-radius: 12px;
+
+            background: #0f172a;
+
+            border: 8px solid #334155;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+        }
+
+
+        .oven-icon {
+
+            font-size: 65px;
+
+            margin-bottom: 15px;
+        }
+
+
+        #ovenStatus {
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+        }
+
+
+        #ovenMessage {
+
+            color: #94a3b8;
+
+            margin-top: 8px;
+
+            font-size: 14px;
+        }
+
+
+        /* ===============================
+           CONTROL CARDS
+        =============================== */
+
+        .controls {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .control-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.07);
+        }
+
+
+        .control-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .control-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .control-icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 12px;
+
+            background: #eff6ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .control-title h2 {
+
+            font-size: 20px;
+
+        }
+
+
+        .control-title p {
+
+            font-size: 13px;
+
+            color: #64748b;
+
+            margin-top: 4px;
+        }
+
+
+        /* ===============================
+           TOGGLE SWITCH
+        =============================== */
+
+        .switch {
+
+            position: relative;
+
+            display: inline-block;
+
+            width: 64px;
+
+            height: 34px;
+        }
+
+
+        .switch input {
+
+            opacity: 0;
+
+            width: 0;
+
+            height: 0;
+        }
+
+
+        .slider {
+
+            position: absolute;
+
+            cursor: pointer;
+
+            inset: 0;
+
+            background: #cbd5e1;
+
+            border-radius: 40px;
+
+            transition: 0.3s;
+        }
+
+
+        .slider:before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 26px;
+
+            height: 26px;
+
+            left: 4px;
+
+            bottom: 4px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 2px 5px rgba(0,0,0,0.2);
+        }
+
+
+        input:checked + .slider {
+
+            background: #22c55e;
+        }
+
+
+        input:checked + .slider:before {
+
+            transform:
+                translateX(30px);
+        }
+
+
+        /* ===============================
+           STATUS
+        =============================== */
+
+        .status-box {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px;
+
+            background: #f8fafc;
+
+            border-radius: 10px;
+        }
+
+
+        .status-label {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        .status-value {
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        .on {
+
+            color: #16a34a;
+        }
+
+
+        .off {
+
+            color: #64748b;
+        }
+
+
+        /* ===============================
+           INFORMATION
+        =============================== */
+
+        .information {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.07);
+        }
+
+
+        .information h2 {
+
+            font-size: 20px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .info-item {
+
+            padding: 18px;
+
+            background: #f8fafc;
+
+            border-radius: 10px;
+
+            text-align: center;
+        }
+
+
+        .info-item p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .info-item strong {
+
+            font-size: 16px;
+
+        }
+
+
+        /* ===============================
+           FOOTER
+        =============================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ===============================
+           RESPONSIVE
+        =============================== */
+
+        @media(max-width: 700px) {
+
+            header {
+
+                padding: 0 20px;
+            }
+
+
+            .logo h2 {
+
+                font-size: 17px;
+            }
+
+
+            .controls {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .heading h1 {
+
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🔥
+        </div>
+
+        <h2>
+            Smart Oven
+        </h2>
+
+    </div>
+
+
+    <div class="connection">
+
+        <span class="connection-dot"
+              id="connectionDot">
+        </span>
+
+        <span id="connectionText">
+            Connecting...
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="container">
+
+
+    <div class="heading">
+
+        <h1>
+            Smart Oven Control
+        </h1>
+
+        <p>
+            Control your oven remotely using Firebase
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         OVEN DISPLAY
+    ================================================== -->
+
+    <div class="oven">
+
+        <div class="oven-screen">
+
+            <div class="oven-icon">
+                🔥
+            </div>
+
+            <div id="ovenStatus">
+                OVEN OFF
+            </div>
+
+            <div id="ovenMessage">
+                Heater and fan are currently OFF
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         CONTROL CARDS
+    ================================================== -->
+
+    <div class="controls">
+
+
+        <!-- =============================================
+             HEATER
+        ============================================== -->
+
+        <div class="control-card">
+
+            <div class="control-header">
+
+                <div class="control-title">
+
+                    <div class="control-icon">
+                        🔥
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Heater
+                        </h2>
+
+                        <p>
+                            Heating element
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="heaterSwitch">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <span class="status-label">
+                    Current Status
+                </span>
+
+                <span
+                    class="status-value off"
+                    id="heaterStatus">
+
+                    OFF
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             FAN
+        ============================================== -->
+
+        <div class="control-card">
+
+            <div class="control-header">
+
+                <div class="control-title">
+
+                    <div class="control-icon">
+                        🌀
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Fan
+                        </h2>
+
+                        <p>
+                             fan
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="fanSwitch">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <span class="status-label">
+                    Current Status
+                </span>
+
+                <span
+                    class="status-value off"
+                    id="fanStatus">
+
+                    OFF
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SYSTEM INFORMATION
+    ================================================== -->
+
+    <div class="information">
+
+        <h2>
+            System Information
+        </h2>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-item">
+
+                <p>
+                    Controller
+                </p>
+
+                <strong>
+                    ESP8266
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <p>
+                    Communication
+                </p>
+
+                <strong>
+                    Wi-Fi
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <p>
+                    Database
+                </p>
+
+                <strong>
+                    Firebase RTDB
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+<footer>
+
+    Smart Solar Microwave Oven
+    <br>
+    ESP8266 + Firebase
+
+</footer>
+
+
+
+<!-- =====================================================
+     FIREBASE
+====================================================== -->
+
+<script type="module">
+
+
+    // =================================================
+    // FIREBASE SDK
+    // =================================================
+
+    import {
+        initializeApp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+    import {
+        getDatabase,
+        ref,
+        set,
+        onValue
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+
+    // =================================================
+    // FIREBASE CONFIGURATION
+    // =================================================
+    //
+    // Replace these values with the configuration
+    // from:
+    //
+    // Firebase Console
+    // → Project Settings
+    // → General
+    // → Your Apps
+    // → Web App
+    //
+    // =================================================
+
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyA6lHYvROG-EGOTGcyld5nmoPgERCaERpo",
+
+        authDomain:
+            "smart-oven-15d51.firebaseapp.com",
+
+        databaseURL:
+            "https://smart-oven-15d51-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+        projectId:
+            "smart-oven-15d51",
+
+        storageBucket:
+            "smart-oven-15d51.firebasestorage.app",
+
+        messagingSenderId:
+            "589362305144",
+
+        appId:
+            "1:589362305144:web:b8bc42c25fd3553af5358d"
+
+    };
+
+
+
+    // =================================================
+    // INITIALIZE FIREBASE
+    // =================================================
+
+    const app =
+        initializeApp(firebaseConfig);
+
+
+    const database =
+        getDatabase(app);
+
+
+
+    // =================================================
+    // FIREBASE REFERENCES
+    // =================================================
+
+    const heaterRef =
+        ref(database, "ovenData/Heater");
+
+
+    const fanRef =
+        ref(database, "ovenData/Fan");
+
+
+
+    // =================================================
+    // HTML ELEMENTS
+    // =================================================
+
+    const heaterSwitch =
+        document.getElementById(
+            "heaterSwitch"
+        );
+
+
+    const fanSwitch =
+        document.getElementById(
+            "fanSwitch"
+        );
+
+
+    const heaterStatus =
+        document.getElementById(
+            "heaterStatus"
+        );
+
+
+    const fanStatus =
+        document.getElementById(
+            "fanStatus"
+        );
+
+
+    const ovenStatus =
+        document.getElementById(
+            "ovenStatus"
+        );
+
+
+    const ovenMessage =
+        document.getElementById(
+            "ovenMessage"
+        );
+
+
+    const connectionText =
+        document.getElementById(
+            "connectionText"
+        );
+
+
+    const connectionDot =
+        document.getElementById(
+            "connectionDot"
+        );
+
+
+
+    // =================================================
+    // UPDATE HEATER DISPLAY
+    // =================================================
+
+    function updateHeaterDisplay(value)
+    {
+
+        if (value === 1)
+        {
+
+            heaterSwitch.checked = true;
+
+            heaterStatus.textContent =
+                "ON";
+
+            heaterStatus.className =
+                "status-value on";
+
+        }
+
+        else
+        {
+
+            heaterSwitch.checked = false;
+
+            heaterStatus.textContent =
+                "OFF";
+
+            heaterStatus.className =
+                "status-value off";
+
+        }
+
+        updateOvenDisplay();
+
+    }
+
+
+
+    // =================================================
+    // UPDATE FAN DISPLAY
+    // =================================================
+
+    function updateFanDisplay(value)
+    {
+
+        if (value === 1)
+        {
+
+            fanSwitch.checked = true;
+
+            fanStatus.textContent =
+                "ON";
+
+            fanStatus.className =
+                "status-value on";
+
+        }
+
+        else
+        {
+
+            fanSwitch.checked = false;
+
+            fanStatus.textContent =
+                "OFF";
+
+            fanStatus.className =
+                "status-value off";
+
+        }
+
+        updateOvenDisplay();
+
+    }
+
+
+
+    // =================================================
+    // UPDATE OVEN DISPLAY
+    // =================================================
+
+    function updateOvenDisplay()
+    {
+
+        const heaterOn =
+            heaterSwitch.checked;
+
+        const fanOn =
+            fanSwitch.checked;
+
+
+        if (heaterOn && fanOn)
+        {
+
+            ovenStatus.textContent =
+                "OVEN ACTIVE";
+
+            ovenMessage.textContent =
+                "Heater and fan are ON";
+
+        }
+
+        else if (heaterOn)
+        {
+
+            ovenStatus.textContent =
+                "HEATING";
+
+            ovenMessage.textContent =
+                "Heater is ON";
+
+        }
+
+        else if (fanOn)
+        {
+
+            ovenStatus.textContent =
+                "FAN RUNNING";
+
+            ovenMessage.textContent =
+                "Fan is ON";
+
+        }
+
+        else
+        {
+
+            ovenStatus.textContent =
+                "OVEN OFF";
+
+            ovenMessage.textContent =
+                "Heater and fan are currently OFF";
+
+        }
+
+    }
+
+
+
+    // =================================================
+    // READ HEATER FROM FIREBASE
+    // =================================================
+
+    onValue(
+
+        heaterRef,
+
+        (snapshot) =>
+        {
+
+            const value =
+                snapshot.val();
+
+            updateHeaterDisplay(
+                Number(value || 0)
+            );
+
+            connectionText.textContent =
+                "Firebase Connected";
+
+            connectionDot.style.background =
+                "#22c55e";
+
+        },
+
+        (error) =>
+        {
+
+            console.error(error);
+
+            connectionText.textContent =
+                "Firebase Error";
+
+            connectionDot.style.background =
+                "#ef4444";
+
+        }
+
+    );
+
+
+
+    // =================================================
+    // READ FAN FROM FIREBASE
+    // =================================================
+
+    onValue(
+
+        fanRef,
+
+        (snapshot) =>
+        {
+
+            const value =
+                snapshot.val();
+
+            updateFanDisplay(
+                Number(value || 0)
+            );
+
+        },
+
+        (error) =>
+        {
+
+            console.error(error);
+
+            connectionText.textContent =
+                "Firebase Error";
+
+            connectionDot.style.background =
+                "#ef4444";
+
+        }
+
+    );
+
+
+
+    // =================================================
+    // HEATER SWITCH
+    // =================================================
+
+    heaterSwitch.addEventListener(
+
+        "change",
+
+        async function()
+        {
+
+            const value =
+                heaterSwitch.checked
+                ? 1
+                : 0;
+
+
+            try
+            {
+
+                await set(
+                    heaterRef,
+                    value
+                );
+
+                console.log(
+                    "Heater:",
+                    value
+                );
+
+            }
+
+            catch(error)
+            {
+
+                console.error(
+                    "Heater error:",
+                    error
+                );
+
+                // Restore previous state
+                heaterSwitch.checked =
+                    !heaterSwitch.checked;
+
+            }
+
+        }
+
+    );
+
+
+
+    // =================================================
+    // FAN SWITCH
+    // =================================================
+
+    fanSwitch.addEventListener(
+
+        "change",
+
+        async function()
+        {
+
+            const value =
+                fanSwitch.checked
+                ? 1
+                : 0;
+
+
+            try
+            {
+
+                await set(
+                    fanRef,
+                    value
+                );
+
+                console.log(
+                    "Fan:",
+                    value
+                );
+
+            }
+
+            catch(error)
+            {
+
+                console.error(
+                    "Fan error:",
+                    error
+                );
+
+                // Restore previous state
+                fanSwitch.checked =
+                    !fanSwitch.checked;
+
+            }
+
+        }
+
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
